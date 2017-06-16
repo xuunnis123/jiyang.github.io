@@ -1,0 +1,825 @@
+<html>
+<head>
+<meta charset="utf-8">
+ <title>page2</title>
+<style type="text/css">
+			@import url(http://fonts.googleapis.com/earlyaccess/notosanstc.css);
+
+			body{
+				 background-image:url(bg.png);
+				 background-repeat:no-repeat;
+				 background-attachment:fixed;
+				 background-position:center;
+				 background-size:cover;
+				 cursor: context-menu;
+				}
+			.big_square{
+				position:fixed;
+				top:7%;
+				left:5%;
+				height:84%;
+				width:90%;
+				background:rgba(13,13,13,0.45);
+			}
+			.st{
+				padding:3px 170px ;
+				border:none;
+				background:rgba(166, 166, 166,0.4);
+				font-family:'Noto Sans TC';
+				font-size:30px;
+				color:#f2f2f2;
+				font-weight:bold;
+				text-align:center;
+				text-shadow:1px 2px 2px  #1a1a1a;
+			}
+			.st:hover{
+				color:#ffd966;
+			}
+			.st:focus{
+				outline: none;
+			}
+			#enter1{
+				position:absolute;
+				left:3%;
+				
+			}
+			#enter2{
+				position:absolute;
+				padding:3px 175px ;
+				left:34.1%;
+				
+			}
+			#enter3{
+				position:absolute;
+				right:3%;
+				
+			}
+			#go_to_draw{
+				position:absolute;
+				background-image:url(pointer.png);
+				background-size:75%;
+				background-repeat:no-repeat;
+				background-color: transparent;
+				background-position:center;
+				border:0px;
+				height:90px;
+				width:75px;
+				top:44%;
+				right:0.4%;
+			}
+			#go_to_draw:hover{
+				background-image:url(pointer_hover.png);
+				background-color: transparent;
+			}
+			#go_to_draw:focus{
+				outline: none;
+			}
+			#little_hint{
+				position:absolute;
+				right:2.2%;
+				top:53%;
+				font-family:'Noto Sans TC';
+				font-size:24px;
+				color:white;
+				font-weight:bold;
+				text-align:center;
+				text-shadow:1px 2px 2px  #1a1a1a;
+			}
+			.map{
+				position:absolute;
+				left:28.8%;
+				top:12.6%;			
+			}
+			#l_info{
+				position:absolute;
+				background:rgba(0, 0, 0,0.5);
+				top:15%;
+				width:15%;
+				height:82%;
+				left:3%;
+				font-size:22px;
+				text-align:center;
+				font-weight:bold;
+			}
+			#l_info p:hover{
+				color:#ffd966;
+			}
+			#l_info:focus{
+				outline: none;
+			}
+			#center_info{
+				position:absolute;
+				background:rgba(0, 0, 0,0.5);
+				top:15%;
+				width:61%;
+				height:82%;
+				left:19.5%;
+				text-align:center;
+				overflow:scroll;
+				overflow-x: hidden;
+			}
+			
+			#r_info{
+				position:absolute;
+				background:rgba(0, 0, 0,0.5);
+				top:15%;
+				width:15%;
+				height:82%;
+				right:3%;
+				font-size:22px;
+				text-align:center;
+				font-weight:bold;
+			}
+			#r_info p:hover{
+				color:#ffd966;
+			}
+			#r_info:focus{
+				outline: none;
+			}
+			.info{
+				font-family:微軟正黑體;
+				color:#d9d9d9;
+				text-shadow:1px 2px 2px  #1a1a1a;
+			}
+			#info_title{
+				font-size:90px;
+				color:white;
+				font-weight:bold;
+ 			}
+			#info_con{
+				color:#fffffb;
+				font-size:25px;
+				width:80%;
+				display:block; 
+				margin:auto;
+			}
+			#info_pic{
+				display:block; 
+				margin:0px auto; 
+				height:350px; 
+				width:500px;
+			}
+			#info_address{
+				font-weight:bold;
+				color:#ffd966;
+				font-size:40px;
+			}
+</style>
+<script src="jquery-3.2.1.js"></script>
+<script>
+<!------------祥豐店面+地址----------------->
+var store_xf=['吉味屋','雨軒拉麵','瘋81','林桑','老朱牛肉麵','富而美','20元麵店','義起來玩吧','晉好食','蟹老闆壽司','瑞麟美而美','早安美芝城','北寧早餐店','日久阿囉哈'];
+/*左*/
+var store_xf_left=['吉味屋','雨軒拉麵','瘋81','林桑','老朱牛肉麵','富而美','20元麵店','義起來玩吧'];//8
+var store_xf_left_address=['基隆市中正區祥豐街192號','基隆市中正區祥豐街83之1號','基隆市中正區祥豐街81號','基隆市中正區祥豐街66號(市場內)','基隆市中正區祥豐街343號','基隆市中正區祥豐街843號','基隆市中正區祥豐街775號','基隆市中正區祥豐街809號'];
+/*右*/
+var store_xf_right=['晉好食','蟹老闆壽司','瑞麟美而美','早安美芝城','北寧早餐店','日久阿囉哈','金園'];//7
+var store_xf_right_address=['基隆市中正區祥豐街827號','基隆市中正區祥豐街839號','基隆市中正區祥豐街843號','基隆市中正區海濱里祥豐街845號1樓','基隆市中正區北寧路9號','基隆市中正區北寧路9號','基隆市中正區祥豐街825號'];
+<!------------中正店面+地址----------------->
+var store_cc=['阿邦燒臘','陳家蔥油餅','歐林鐵板燒','永和豆漿','霸味薑母鴨','牛膳房','海大燒臘','宜蘭包子店','佬地方','八方雲集','寶妹','三媽臭臭鍋','吮指王','小蘋果蔥抓餅','星翔快餐','APPLE203','ㄚMAN'];
+/*左*/
+var store_cc_left=['阿邦燒臘','陳家蔥油餅','歐林鐵板燒','永和豆漿','霸味薑母鴨','牛膳房','海大燒臘','宜蘭包子店'];//8
+var store_cc_left_address=['基隆市中正區中正路650號','基隆市中正區中正路316號','基隆市中正區中正路213之1號','基隆市中正區中正路746-1號','基隆市中正區中正路746號','基隆市中正區中正路754號','基隆市中正區中正路790號','基隆市中正區中正路780號'];
+/*右*/
+var store_cc_right=['佬地方','八方雲集','寶妹','三媽臭臭鍋','吮指王','小蘋果蔥抓餅','星翔快餐','APPLE203','ㄚMAN'];//9
+var store_cc_right_address=['基隆市中正區中正路768號','基隆市中正路794號','基隆市中正區中正路792號','基隆市中正區中正路812-5號','基隆市中正區中正路591號','基隆市中正區中正路812-5號','基隆市中正區中正路806號','基隆市中正區中正路818號','基隆市中正區中正路816號'];
+<!------------新豐店面+地址----------------->
+var store_xing=['魔王雞排','NASO CAFE','老先覺','魯肉男便當','炭烤三明治','麥當勞','TOGO CAFE','MARLON','蒸餃小舖','紀香無骨炸雞','永亨鹹酥雞','承香廚館','大滷桶','小廟口','香廚麵食','QQ魯肉飯','董娘水餃','山海屋','5味臭臭鍋'];
+/*左*/
+var store_xing_left=['魔王雞排','NASO CAFE','老先覺','魯肉男便當','炭烤三明治','麥當勞','TOGO CAFE','MARLON','蒸餃小舖'];//9
+var store_xing_left_address=['基隆市中正區新豐街816號','基隆市中正區新豐街229號','基隆市中正區新豐街233號','基隆市中正區新豐街247號','基隆市基隆市中正區新豐街245號','基隆市新豐街249號1~3樓','基隆市中正區新豐街251巷4弄17號','基隆市新豐街251巷4弄7號','基隆市中正區新豐街261號'];
+/*右*/
+var store_xing_right=['紀香無骨炸雞','永亨鹹酥雞','承香廚館','大滷桶','小廟口','香廚麵食','QQ魯肉飯','董娘水餃','山海屋','5味臭臭鍋'];//10
+var store_xing_right_address=['基隆市中正區新豐街265號','基隆市中正區新豐街263號','基隆市中正區新豐街281號','基隆市中正區新豐街283號','基隆市中正區新豐街345號','基隆市中正區新豐街304號','基隆市中正區新豐街405號','基隆市中正區新豐街424號','基隆市中正區新豐街438號','基隆市中正區新豐街251巷11號'];
+<!------------------------------------------>
+	function start(){
+		document.getElementById("go_to_draw").addEventListener("click",change_draw,false);
+		document.getElementById("enter1").addEventListener("click",func_e1,false);
+		document.getElementById("enter2").addEventListener("click",func_e2,false);
+		document.getElementById("enter3").addEventListener("click",func_e3,false);
+	}
+	
+/*****轉去抽獎頁****************************/
+	function change_draw(){
+		location.href="p4.html";
+	}
+	
+/*****跳成祥豐頁****************************/	
+	function func_e1(){
+		$(document).ready(function(){
+			$("#center_info").empty();
+			$(".map").hide();
+			$(".info").show();
+		});		
+		/*店家列表*/
+		/*左*/
+		var message_xf_left=' ';
+		for(var i1=0;i1<8;i1++){
+			message_xf_left+="<p class='xf' id='store_xf_left_"+i1+"'>"+store_xf_left[i1]+"</p>";
+		}
+		document.getElementById("l_info").innerHTML=message_xf_left;
+		/*右*/
+		var message_xf_right=' ';
+		for(var i2=0;i2<7;i2++){
+			message_xf_right+="<p class='xf' id='store_xf_right_"+i2+"'>"+store_xf_right[i2]+"</p>";
+		}
+		document.getElementById("r_info").innerHTML=message_xf_right;
+		/*店家資訊*/
+		/*左*/
+		$(document).ready(function(){
+			$("#store_xf_left_0").click(function(){
+					$("#center_info").empty();
+					$("#center_info").append("<p id='info_title'>吉味屋</p>");
+					$("#center_info").append("<img src='吉味屋.jpg' id='info_pic'></br>");
+					$("#center_info").append("<p id='info_address'>地址："+store_xf_left_address[0]+"</p>");
+					$("#center_info").append("<p id='info_con'>物美價廉，搭配組合多種。值得一吃再吃。據說是某位組員與她好夥伴的愛店，紅茶好喝，乳酪餅好吃，下略5000字，搭拉拉拉</p>");
+			});
+		});
+		$(document).ready(function(){
+			$("#store_xf_left_1").click(function(){
+					$("#center_info").empty();
+					$("#center_info").append("<p id='info_title'>雨軒拉麵</p>");
+					$("#center_info").append("<img src='雨軒拉麵.jpg' id='info_pic'></br>");
+					$("#center_info").append("<p id='info_address'>地址："+store_xf_left_address[1]+"</p>");
+					$("#center_info").append("<p id='info_con'>以學生角度來說，算是CP值比較高的的拉麵店了。豬排拉麵滿推薦的，能吃到炸豬排又能吃大碗拉麵。地獄拉麵也很好吃!</p>");
+			});
+		});
+		$(document).ready(function(){
+			$("#store_xf_left_2").click(function(){
+					$("#center_info").empty();
+					$("#center_info").append("<p id='info_title'>瘋81</p>");
+					$("#center_info").append("<img src='瘋81.jpg' id='info_pic'></br>");
+					$("#center_info").append("<p id='info_address'>地址："+store_xf_left_address[2]+"</p>");
+					$("#center_info").append("<p id='info_con'>輕食類，進去吃一趟也會讓你錢包變很輕</p>");
+			});
+		});
+		$(document).ready(function(){
+			$("#store_xf_left_3").click(function(){
+					$("#center_info").empty();
+					$("#center_info").append("<p id='info_title'>林桑</p>");
+					$("#center_info").append("<img src='林桑.jpg' id='info_pic'></br>");
+					$("#center_info").append("<p id='info_address'>地址："+store_xf_left_address[3]+"</p>");
+					$("#center_info").append("<p id='info_con'>隱身在祥豐市場的日本料理店  100元的生魚飯以及各種烏龍麵堪稱高cp</p>");
+			});
+		});
+		$(document).ready(function(){
+			$("#store_xf_left_4").click(function(){
+					$("#center_info").empty();
+					$("#center_info").append("<p id='info_title'>老朱牛肉麵</p>");
+					$("#center_info").append("<img src='老朱牛肉麵.jpg' id='info_pic'></br>");
+					$("#center_info").append("<p id='info_address'>地址："+store_xf_left_address[4]+"</p>");
+					$("#center_info").append("<p id='info_con'></p>");
+			});
+		});
+		$(document).ready(function(){
+			$("#store_xf_left_5").click(function(){
+					$("#center_info").empty();
+					$("#center_info").append("<p id='info_title'>富而美</p>");
+					$("#center_info").append("<img src='富而美.jpg' id='info_pic'></br>");
+					$("#center_info").append("<p id='info_address'>地址："+store_xf_left_address[5]+"</p>");
+					$("#center_info").append("<p id='info_con'>本間店最知名招牌是：奶油熱狗麵，早餐優質選擇。另外蛋餅也充滿了媽媽的味道，極度推薦。但總觀來說套餐價位偏高</p>");
+			});
+		});
+		$(document).ready(function(){
+			$("#store_xf_left_6").click(function(){
+					$("#center_info").empty();
+					$("#center_info").append("<p id='info_title'>20元麵店</p>");
+					$("#center_info").append("<img src='二十元麵店.jpg' id='info_pic'></br>");
+					$("#center_info").append("<p id='info_address'>地址："+store_xf_left_address[6]+"</p>");
+					$("#center_info").append("<p id='info_con'>便宜大碗，美味與否見仁見智</p>");
+			});
+		});
+		$(document).ready(function(){
+			$("#store_xf_left_7").click(function(){
+					$("#center_info").empty();
+					$("#center_info").append("<p id='info_title'>義起來玩吧</p>");
+					$("#center_info").append("<img src='義起來玩吧.jpg' id='info_pic'></br>");
+					$("#center_info").append("<p id='info_address'>地址："+store_xf_left_address[7]+"</p>");
+					$("#center_info").append("<p id='info_con'>有美食有桌遊，以前的深夜時段有調酒服務，最近似乎沒有了</p>");
+			});
+		});
+		/*右*/
+		$(document).ready(function(){
+			$("#store_xf_right_0").click(function(){
+					$("#center_info").empty();
+					$("#center_info").append("<p id='info_title'>晉好食</p>");
+					$("#center_info").append("<img src='晉好食.jpg' id='info_pic'></br>");
+					$("#center_info").append("<p id='info_address'>地址："+store_xf_right_address[0]+"</p>");
+					$("#center_info").append("<p id='info_con'>平價中式料理，炒飯炒麵燴飯都蠻推薦的，建議加價加個起士整個口感大升級。</p>");
+			});
+		});
+		$(document).ready(function(){
+			$("#store_xf_right_1").click(function(){
+					$("#center_info").empty();
+					$("#center_info").append("<p id='info_title'>蟹老闆壽司</p>");
+					$("#center_info").append("<img src='蟹老闆壽司.jpg' id='info_pic'></br>");
+					$("#center_info").append("<p id='info_address'>地址："+store_xf_right_address[1]+"</p>");
+					$("#center_info").append("<p id='info_con'>一個壽司才10元，大小也來算合適，一餐買個五六顆就吃得飽了，老闆娘也不錯漂亮，一次滿足視覺與味覺的享受。</p>");
+			});
+		});
+		$(document).ready(function(){
+			$("#store_xf_right_2").click(function(){
+					$("#center_info").empty();
+					$("#center_info").append("<p id='info_title'>瑞麟美而美</p>");
+					$("#center_info").append("<img src='瑞麟美而美.jpg' id='info_pic'></br>");
+					$("#center_info").append("<p id='info_address'>地址："+store_xf_right_address[2]+"</p>");
+					$("#center_info").append("<p id='info_con'>號稱海大附近最便宜早餐店之一，店內整修過後在視覺上似乎較沒有衛生疑慮了</p>");
+			});
+		});
+		$(document).ready(function(){
+			$("#store_xf_right_3").click(function(){
+					$("#center_info").empty();
+					$("#center_info").append("<p id='info_title'>早安美芝城</p>");
+					$("#center_info").append("<img src='早安美芝城.jpg' id='info_pic'></br>");
+					$("#center_info").append("<p id='info_address'>地址："+store_xf_right_address[3]+"</p>");
+					$("#center_info").append("<p id='info_con'>老闆親切，也適合很多朋友一起來併桌吃，配著音樂動起來吃早午餐，是最享受的早晨。一個鐵板麵套餐搭配一個蛋餅 飽足感就可以維持到晚上。但常常漏單，季陽愛店</p>");
+			});
+		});
+		$(document).ready(function(){
+			$("#store_xf_right_4").click(function(){
+					$("#center_info").empty();
+					$("#center_info").append("<p id='info_title'>北寧早餐店</p>");
+					$("#center_info").append("<img src='北寧早餐店.jpg' id='info_pic'></br>");
+					$("#center_info").append("<p id='info_address'>地址："+store_xf_right_address[4]+"</p>");
+					$("#center_info").append("<p id='info_con'>最有名的莫過於蛋餅，不同於其他店的蛋餅，他們是手工的餅皮吃起來更是不同。建議提早來，不然人真的很多。</p>");
+			});
+		});
+		$(document).ready(function(){
+			$("#store_xf_right_5").click(function(){
+					$("#center_info").empty();
+					$("#center_info").append("<p id='info_title'>日久阿囉哈</p>");
+					$("#center_info").append("<img src='日久阿囉哈.jpg' id='info_pic'></br>");
+					$("#center_info").append("<p id='info_address'>地址："+store_xf_right_address[5]+"</p>");
+					$("#center_info").append("<p id='info_con'>平均單價偏高。但絕對是最好吃的早餐店之一，奶茶尤其好喝</p>");
+			});
+		});
+		$(document).ready(function(){
+			$("#store_xf_right_6").click(function(){
+					$("#center_info").empty();
+					$("#center_info").append("<p id='info_title'>金園</p>");
+					$("#center_info").append("<img src='金園.jpg' id='info_pic'></br>");
+					$("#center_info").append("<p id='info_address'>地址："+store_xf_right_address[6]+"</p>");
+					$("#center_info").append("<p id='info_con'>曾經在一餐二樓的霸主店家 跑到祥豐街開店之後  招牌的鐵板類料理及炒飯依舊美味</p>");
+			});
+		});
+	}
+	
+/*****跳成中正頁****************************/
+	function func_e2(){
+		$(document).ready(function(){
+			$("#center_info").empty();
+			$(".map").hide();
+			$(".info").show();
+		});
+		/*店家列表*/
+		/*左*/
+		var message_cc_left=' ';
+		for(var i3=0;i3<8;i3++){
+			message_cc_left+="<p class='cc' id='store_cc_left_"+i3+"'>"+store_cc_left[i3]+"</p>";
+		}
+		document.getElementById("l_info").innerHTML=message_cc_left;
+		/*右*/
+		var message_cc_right=' ';
+		for(var i4=0;i4<7;i4++){
+			message_cc_right+="<p class='cc' id='store_cc_right_"+i4+"'>"+store_cc_right[i4]+"</p>";
+		}
+		document.getElementById("r_info").innerHTML=message_cc_right;
+	
+
+	/*店家資訊*/
+	
+	/*左*/
+	$(document).ready(function(){
+			$("#store_cc_left_0").click(function(){
+					$("#center_info").empty();
+					$("#center_info").append("<p id='info_title'>阿邦燒臘</p>");
+					$("#center_info").append("<img src='阿邦燒臘.jpg' id='info_pic'></br>");
+					$("#center_info").append("<p id='info_address'>地址："+store_cc_left_address[0]+"</p>");
+					$("#center_info").append("<p id='info_con'></p>");
+			});
+		});
+	$(document).ready(function(){
+			$("#store_cc_left_1").click(function(){
+					$("#center_info").empty();
+					$("#center_info").append("<p id='info_title'>陳家蔥油餅</p>");
+					$("#center_info").append("<img src='陳家蔥油餅.jpg' id='info_pic'></br>");
+					$("#center_info").append("<p id='info_address'>地址："+store_cc_left_address[1]+"</p>");
+					$("#center_info").append("<p id='info_con'>平價蔥油餅，懷念古早味的你錯過不了。</p>");
+			});
+		});	
+	$(document).ready(function(){
+			$("#store_cc_left_2").click(function(){
+					$("#center_info").empty();
+					$("#center_info").append("<p id='info_title'>歐林鐵板燒</p>");
+					$("#center_info").append("<img src='歐林鐵板燒.jpg' id='info_pic'></br>");
+					$("#center_info").append("<p id='info_address'>地址："+store_cc_left_address[2]+"</p>");
+					$("#center_info").append("<p id='info_con'>便宜的鐵板燒  雖然各種肉吃起來都同一個味道，白飯飲料和湯皆吃到飽</p>");
+			});
+		});	
+	$(document).ready(function(){
+			$("#store_cc_left_3").click(function(){
+					$("#center_info").empty();
+					$("#center_info").append("<p id='info_title'>永和豆漿</p>");
+					$("#center_info").append("<img src='永和豆漿.jpg' id='info_pic'></br>");
+					$("#center_info").append("<p id='info_address'>地址："+store_cc_left_address[3]+"</p>");
+					$("#center_info").append("<p id='info_con'>深夜才開，系隊隊員練完球的好朋友，銅板價美食，吃遍台灣各式小吃。</p>");
+			});
+		});	
+	$(document).ready(function(){
+			$("#store_cc_left_4").click(function(){
+					$("#center_info").empty();
+					$("#center_info").append("<p id='info_title'>霸味薑母鴨</p>");
+					$("#center_info").append("<img src='霸味薑母鴨.jpg' id='info_pic'></br>");
+					$("#center_info").append("<p id='info_address'>地址："+store_cc_left_address[4]+"</p>");
+					$("#center_info").append("<p id='info_con'></p>");
+			});
+		});	
+	$(document).ready(function(){
+			$("#store_cc_left_5").click(function(){
+					$("#center_info").empty();
+					$("#center_info").append("<p id='info_title'>牛膳房</p>");
+					$("#center_info").append("<img src='牛膳房.jpg' id='info_pic'></br>");
+					$("#center_info").append("<p id='info_address'>地址："+store_cc_left_address[5]+"</p>");
+					$("#center_info").append("<p id='info_con'></p>");
+			});
+		});	
+	$(document).ready(function(){
+			$("#store_cc_left_6").click(function(){
+					$("#center_info").empty();
+					$("#center_info").append("<p id='info_title'>海大燒臘</p>");
+					$("#center_info").append("<img src='海大燒臘店.jpg' id='info_pic'></br>");
+					$("#center_info").append("<p id='info_address'>地址："+store_cc_left_address[6]+"</p>");
+					$("#center_info").append("<p id='info_con'>老闆娘有海大女神之稱，一抹微笑傾棟全海大男生的心。化皮燒肉燒臘是最推薦的，那酥脆的化皮搭配由而不膩的燒肉，一碗菜湯，一杯飲料，人生最大享受。內用可以加飯加到你吃不下為止。</p>");
+			});
+		});
+    $(document).ready(function(){
+			$("#store_cc_left_7").click(function(){
+					$("#center_info").empty();
+					$("#center_info").append("<p id='info_title'>宜蘭包子店</p>");
+					$("#center_info").append("<img src='宜蘭包子店.jpg' id='info_pic'></br>");
+					$("#center_info").append("<p id='info_address'>地址："+store_cc_left_address[7]+"</p>");
+					$("#center_info").append("<p id='info_con'>10元包子 餡料不算太多 皮滿Q</p>");
+			});
+		});
+  
+	
+/*右*/
+	$(document).ready(function(){
+			$("#store_cc_right_0").click(function(){
+					$("#center_info").empty();
+					$("#center_info").append("<p id='info_title'>佬地方</p>");
+					$("#center_info").append("<img src='佬地方.jpg' id='info_pic'></br>");
+					$("#center_info").append("<p id='info_address'>地址："+store_cc_right_address[0]+"</p>");
+					$("#center_info").append("<p id='info_con'>CP值滿高的牛排店也有沙拉吧吃到飽。推薦很餓的時候，可以來吃吃看。</p>");
+			});
+		});
+	$(document).ready(function(){
+			$("#store_cc_right_1").click(function(){
+					$("#center_info").empty();
+					$("#center_info").append("<p id='info_title'>八方雲集</p>");
+					$("#center_info").append("<img src='八方雲集.jpg' id='info_pic'></br>");
+					$("#center_info").append("<p id='info_address'>地址："+store_cc_right_address[1]+"</p>");
+					$("#center_info").append("<p id='info_con'>鍋貼煎得恰到好處堪稱基隆鍋貼之最，玉米濃湯湯餃、酸辣湯也是熟客常點，老闆號稱海大張孝全，用餐環境佳，也是系隊練完球的選擇之一。</p>");
+			});
+		});
+	$(document).ready(function(){
+			$("#store_cc_right_2").click(function(){
+					$("#center_info").empty();
+					$("#center_info").append("<p id='info_title'>寶妹</p>");
+					$("#center_info").append("<img src='寶妹.jpg' id='info_pic'></br>");
+					$("#center_info").append("<p id='info_address'>地址："+store_cc_right_address[2]+"</p>");
+					$("#center_info").append("<p id='info_con'>基隆少數東南亞料理，以老闆態度出名，自從價位調漲後更是靠北海大常客，但實際上味道是不錯的，推薦椒麻雞和打拋豬。</p>");
+			});
+		});
+	$(document).ready(function(){
+			$("#store_cc_right_3").click(function(){
+					$("#center_info").empty();
+					$("#center_info").append("<p id='info_title'>三媽臭臭鍋</p>");
+					$("#center_info").append("<img src='三媽臭臭鍋.jpg' id='info_pic'></br>");
+					$("#center_info").append("<p id='info_address'>地址："+store_cc_right_address[3]+"</p>");
+					$("#center_info").append("<p id='info_con'>這是個需要有朋友的餐廳，極度不推薦一人來吃，否則會成為全場焦點。除此之外很好吃。一百出頭，吃透各式美味，也有冰淇淋吃到飽。</p>");
+			});
+		});
+	$(document).ready(function(){
+			$("#store_cc_right_4").click(function(){
+					$("#center_info").empty();
+					$("#center_info").append("<p id='info_title'>吮指王</p>");
+					$("#center_info").append("<img src='吮指王.jpg' id='info_pic'></br>");
+					$("#center_info").append("<p id='info_address'>地址："+store_cc_right_address[4]+"</p>");
+					$("#center_info").append("<p id='info_con'>吮指王的雞排是海大附近數一數二好吃的，肉質鮮美、出汁。也因此生意很好，通常需要排隊排很久。</p>");
+			});
+		});
+	$(document).ready(function(){
+			$("#store_cc_right_5").click(function(){
+					$("#center_info").empty();
+					$("#center_info").append("<p id='info_title'>小蘋果蔥抓餅</p>");
+					$("#center_info").append("<img src='小蘋果蔥油餅.jpg' id='info_pic'></br>");
+					$("#center_info").append("<p id='info_address'>地址："+store_cc_right_address[5]+"</p>");
+					$("#center_info").append("<p id='info_con'>好吃的蔥抓餅 可以搭配多種配料跟九層塔，老闆娘極度親切</p>");
+			});
+		});
+	$(document).ready(function(){
+			$("#store_cc_right_6").click(function(){
+					$("#center_info").empty();
+					$("#center_info").append("<p id='info_title'>星翔快餐</p>");
+					$("#center_info").append("<img src='星翔快餐店.jpg' id='info_pic'></br>");
+					$("#center_info").append("<p id='info_address'>地址："+store_cc_right_address[6]+"</p>");
+					$("#center_info").append("<p id='info_con'></p>");
+			});
+		});
+	$(document).ready(function(){
+			$("#store_cc_right_7").click(function(){
+					$("#center_info").empty();
+					$("#center_info").append("<p id='info_title'>APPLE203</p>");
+					$("#center_info").append("<img src='APPLE203.jpg' id='info_pic'></br>");
+					$("#center_info").append("<p id='info_address'>地址："+store_cc_right_address[7]+"</p>");
+					$("#center_info").append("<p id='info_con'></p>");
+			});
+		});
+	$(document).ready(function(){
+			$("#store_cc_right_8").click(function(){
+					$("#center_info").empty();
+					$("#center_info").append("<p id='info_title'>ㄚMAN</p>");
+					$("#center_info").append("<img src='ㄚMAN.jpg' id='info_pic'></br>");
+					$("#center_info").append("<p id='info_address'>地址："+store_cc_right_address[8]+"</p>");
+					$("#center_info").append("<p id='info_con'>用餐環境蠻不錯的早午餐店，份量、選項也夠多，只是店內座位偏少，不一定有辦法內用。</p>");
+			});
+		});	
+	}
+	
+/*****跳成新豐頁****************************/	
+	function func_e3(){
+		$(document).ready(function(){
+			$("#center_info").empty();
+			$(".map").hide();
+			$(".info").show();
+		});
+		/*店家列表*/
+		/*左*/		
+		var message_xing_left=' ';
+		for(var i5=0;i5<8;i5++){
+			message_xing_left+="<p class='xing' id='store_xing_left_"+i5+"'>"+store_xing_left[i5]+"</p>";
+		}
+		document.getElementById("l_info").innerHTML=message_xing_left;
+		/*右*/
+		var message_xing_right=' ';
+		for(var i6=0;i6<7;i6++){
+			message_xing_right+="<p class='xing' id='store_xing_right_"+i6+"'>"+store_xing_right[i6]+"</p>";
+		}
+		document.getElementById("r_info").innerHTML=message_xing_right;
+		/*店家資訊*/
+		/*左*/
+		$(document).ready(function(){
+			$("#store_xing_left_0").click(function(){
+					$("#center_info").empty();
+					$("#center_info").append("<p id='info_title'>魔王雞排</p>");
+					$("#center_info").append("<img src='魔王雞排.jpg' id='info_pic'></br>");
+					$("#center_info").append("<p id='info_address'>地址："+store_xing_left_address[0]+"</p>");
+					$("#center_info").append("<p id='info_con'>厚的跟牛排一樣的雞排，下午就開了的雞排店，極度推薦魔王的誘惑 享受這種口舌間的暢快感。</p>");
+			});
+		});	
+		$(document).ready(function(){
+			$("#store_xing_left_1").click(function(){
+					$("#center_info").empty();
+					$("#center_info").append("<p id='info_title'>NASO CAFE</p>");
+					$("#center_info").append("<img src='NASO CAFE.jpg' id='info_pic'></br>");
+					$("#center_info").append("<p id='info_address'>地址："+store_xing_left_address[1]+"</p>");
+					$("#center_info").append("<p id='info_con'></p>");
+			});
+		});	
+		$(document).ready(function(){
+			$("#store_xing_left_2").click(function(){
+					$("#center_info").empty();
+					$("#center_info").append("<p id='info_title'>老先覺</p>");
+					$("#center_info").append("<img src='老先覺.jpg' id='info_pic'></br>");
+					$("#center_info").append("<p id='info_address'>地址："+store_xing_left_address[2]+"</p>");
+					$("#center_info").append("<p id='info_con'>高階三媽，價格也高了一階</p>");
+			});
+		});	
+		$(document).ready(function(){
+			$("#store_xing_left_3").click(function(){
+					$("#center_info").empty();
+					$("#center_info").append("<p id='info_title'>魯肉男便當</p>");
+					$("#center_info").append("<img src='魯肉男便當.jpg' id='info_pic'></br>");
+					$("#center_info").append("<p id='info_address'>地址："+store_xing_left_address[3]+"</p>");
+					$("#center_info").append("<p id='info_con'>便當的主菜都是剛起鍋，魚的部分很新鮮，想吃便當的時候，可以吃吃看。</p>");
+			});
+		});	
+		$(document).ready(function(){
+			$("#store_xing_left_4").click(function(){
+					$("#center_info").empty();
+					$("#center_info").append("<p id='info_title'>炭烤三明治</p>");
+					$("#center_info").append("<img src='碳烤三明治.jpg' id='info_pic'></br>");
+					$("#center_info").append("<p id='info_address'>地址："+store_xing_left_address[4]+"</p>");
+					$("#center_info").append("<p id='info_con'></p>");
+			});
+		});	
+		$(document).ready(function(){
+			$("#store_xing_left_5").click(function(){
+					$("#center_info").empty();
+					$("#center_info").append("<p id='info_title'>麥當勞</p>");
+					$("#center_info").append("<img src='麥當勞.jpg' id='info_pic'></br>");
+					$("#center_info").append("<p id='info_address'>地址："+store_xing_left_address[5]+"</p>");
+					$("#center_info").append("<p id='info_con'>用餐環境極為優質，也乾淨，套餐組合多、座位多，亦為系隊練完球用餐選項之一，也是你打工的好選擇。</p>");
+			});
+		});	
+		$(document).ready(function(){
+			$("#store_xing_left_6").click(function(){
+					$("#center_info").empty();
+					$("#center_info").append("<p id='info_title'>TOGO CAFE</p>");
+					$("#center_info").append("<img src='TOGO CAFE.jpg' id='info_pic'></br>");
+					$("#center_info").append("<p id='info_address'>地址："+store_xing_left_address[6]+"</p>");
+					$("#center_info").append("<p id='info_con'>CP值遠高於麥當勞，漢堡、薯條、帕尼尼...等品質皆在水準之上，還有隻可愛的店狗陪你用餐</p>");
+			});
+		});	
+		$(document).ready(function(){
+			$("#store_xing_left_7").click(function(){
+					$("#center_info").empty();
+					$("#center_info").append("<p id='info_title'>MARLON</p>");
+					$("#center_info").append("<img src='MARLON.jpg' id='info_pic'></br>");
+					$("#center_info").append("<p id='info_address'>地址："+store_xing_left_address[7]+"</p>");
+					$("#center_info").append("<p id='info_con'>號稱熬煮三天的美味咖哩，搭配超好喝飲料與特殊的裝潢跟餐具，用餐氣氛別有一番風味。份量偏大，建議攜帶男朋友或大食量朋友一同前往</p>");
+			});
+		});	
+		$(document).ready(function(){
+			$("#store_xing_left_8").click(function(){
+					$("#center_info").empty();
+					$("#center_info").append("<p id='info_title'>蒸餃小舖</p>");
+					$("#center_info").append("<img src='蒸餃小舖.jpg' id='info_pic'></br>");
+					$("#center_info").append("<p id='info_address'>地址："+store_xing_left_address[8]+"</p>");
+					$("#center_info").append("<p id='info_con'></p>");
+			});
+		});	
+		/*右*/
+		$(document).ready(function(){
+			$("#store_xing_right_0").click(function(){
+					$("#center_info").empty();
+					$("#center_info").append("<p id='info_title'>紀香無骨炸雞</p>");
+					$("#center_info").append("<img src='紀香無骨炸雞.jpg' id='info_pic'></br>");
+					$("#center_info").append("<p id='info_address'>地址："+store_xing_right_address[0]+"</p>");
+					$("#center_info").append("<p id='info_con'>新豐街上少數好吃的雞排店，雞排要切不要辣是基本準則。不過開的時間滿不一定的，建議要有備案，以免撲空。</p>");
+			});
+		});	
+		$(document).ready(function(){
+			$("#store_xing_right_1").click(function(){
+					$("#center_info").empty();
+					$("#center_info").append("<p id='info_title'>永亨鹹酥雞</p>");
+					$("#center_info").append("<img src='永亨鹹酥雞.jpg' id='info_pic'></br>");
+					$("#center_info").append("<p id='info_address'>地址："+store_xing_right_address[1]+"</p>");
+					$("#center_info").append("<p id='info_con'>只有薯條好吃</p>");
+			});
+		});	
+		$(document).ready(function(){
+			$("#store_xing_right_2").click(function(){
+					$("#center_info").empty();
+					$("#center_info").append("<p id='info_title'>承香廚館</p>");
+					$("#center_info").append("<img src='承香廚館.jpg' id='info_pic'></br>");
+					$("#center_info").append("<p id='info_address'>地址："+store_xing_right_address[2]+"</p>");
+					$("#center_info").append("<p id='info_con'>就是一家普通快餐店</p>");
+			});
+		});	
+		$(document).ready(function(){
+			$("#store_xing_right_3").click(function(){
+					$("#center_info").empty();
+					$("#center_info").append("<p id='info_title'>大滷桶</p>");
+					$("#center_info").append("<img src='大滷桶.jpg' id='info_pic'></br>");
+					$("#center_info").append("<p id='info_address'>地址："+store_xing_right_address[3]+"</p>");
+					$("#center_info").append("<p id='info_con'>食物滷得蠻入味，搭配酸菜以後真的是滿不錯的主餐。</p>");
+			});
+		});	
+		$(document).ready(function(){
+			$("#store_xing_right_4").click(function(){
+					$("#center_info").empty();
+					$("#center_info").append("<p id='info_title'>小廟口</p>");
+					$("#center_info").append("<img src='小廟口.jpg' id='info_pic'></br>");
+					$("#center_info").append("<p id='info_address'>地址："+store_xing_right_address[4]+"</p>");
+					$("#center_info").append("<p id='info_con'>有許多家店可以選擇。有炒飯、炒麵、牛肉麵、魚飯及各式中式小吃，就像在逛縮小版的夜市。口味偏家常菜，有媽媽的味道。</p>");
+			});
+		});	
+		$(document).ready(function(){
+			$("#store_xing_right_5").click(function(){
+					$("#center_info").empty();
+					$("#center_info").append("<p id='info_title'>香廚麵食</p>");
+					$("#center_info").append("<img src='香廚麵食.jpg' id='info_pic'></br>");
+					$("#center_info").append("<p id='info_address'>地址："+store_xing_right_address[5]+"</p>");
+					$("#center_info").append("<p id='info_con'>招牌清燉牛肉麵跟蔥油餅 都好吃 </p>");
+			});
+		});	
+		$(document).ready(function(){
+			$("#store_xing_right_6").click(function(){
+					$("#center_info").empty();
+					$("#center_info").append("<p id='info_title'>QQ魯肉飯</p>");
+					$("#center_info").append("<img src='QQ魯肉飯.jpg' id='info_pic'></br>");
+					$("#center_info").append("<p id='info_address'>地址："+store_xing_right_address[6]+"</p>");
+					$("#center_info").append("<p id='info_con'>知名便當店，24小時營業，菜給得滿大方的，足以飽食一頓，口味也還不錯。怕太油的人，請不要淋滷汁。</p>");
+			});
+		});	
+		$(document).ready(function(){
+			$("#store_xing_right_7").click(function(){
+					$("#center_info").empty();
+					$("#center_info").append("<p id='info_title'>董娘水餃</p>");
+					$("#center_info").append("<img src='董娘水餃.jpg' id='info_pic'></br>");
+					$("#center_info").append("<p id='info_address'>地址："+store_xing_right_address[7]+"</p>");
+					$("#center_info").append("<p id='info_con'>招牌水餃非常值得一吃，價格也合理。吃完以後嘴裡仍然念念不忘那特殊的水餃風味。</p>");
+			});
+		});	
+		$(document).ready(function(){
+			$("#store_xing_right_8").click(function(){
+					$("#center_info").empty();
+					$("#center_info").append("<p id='info_title'>山海屋</p>");
+					$("#center_info").append("<img src='山海屋.jpg' id='info_pic'></br>");
+					$("#center_info").append("<p id='info_address'>地址："+store_xing_right_address[8]+"</p>");
+					$("#center_info").append("<p id='info_con'>口味不會太死鹹，鐵板燒組合多又平價，可以多加嘗試。適合食量大的人來吃。</p>");
+			});
+		});	
+		$(document).ready(function(){
+			$("#store_xing_right_9").click(function(){
+					$("#center_info").empty();
+					$("#center_info").append("<p id='info_title'>5味臭臭鍋</p>");
+					$("#center_info").append("<img src='5味臭臭鍋.jpg' id='info_pic'></br>");
+					$("#center_info").append("<p id='info_address'>地址："+store_xing_right_address[9]+"</p>");
+					$("#center_info").append("<p id='info_con'>火鍋CP值比三媽臭臭鍋高，內有白飯、冰品、飲料吃到飽，點配料也還算份量大，可以兩個人點一個配料。火鍋口味也是水準之中，推薦值得一吃。</p>");
+			});
+		});	
+		
+	}
+	
+/*跳頁提示*/	
+	$(document).ready(function(){
+		$("#go_to_draw").mouseover(function(){
+			$("#little_hint").show();
+		});
+		$("#go_to_draw").mouseout(function(){
+			$("#little_hint").hide();
+		});
+	});
+/*地圖顯示-祥豐*/
+	$(document).ready(function(){
+		$("#enter1").mouseover(function(){
+			$("#e1").show();
+			$("#origin").hide();
+		});
+		$("#enter1").mouseout(function(){
+			$("#e1").hide();
+			$("#origin").show();
+		});
+	});
+/*地圖顯示-中正*/
+	$(document).ready(function(){
+		$("#enter2").mouseover(function(){
+			$("#e2").show();
+			$("#origin").hide();
+		});
+		$("#enter2").mouseout(function(){
+			$("#e2").hide();
+			$("#origin").show();
+		});
+	});
+/*地圖顯示-新豐*/
+	$(document).ready(function(){
+		$("#enter3").mouseover(function(){
+			$("#e3").show();
+			$("#origin").hide();
+		});
+		$("#enter3").mouseout(function(){
+			$("#e3").hide();
+			$("#origin").show();
+		});
+	});
+/****************************/
+	window.addEventListener( "load", start, false );
+</script>
+
+</head>
+
+<body>
+	<div id="bgs" class="big_square">
+			<div class="inner">
+				<form action="#">
+					<input type="button" value="祥豐街" class="st" id="enter1">
+					<input type="button" value="中正路" class="st" id="enter2">
+					<input type="button" value="新豐街" class="st" id="enter3">				
+				</form>
+				<div class="map">
+					<img src="map_org.PNG" id="origin">
+					<img src="祥豐.png" style="display:none;" id="e1">
+					<img src="中正.png" style="display:none;" id="e2">
+					<img src="新豐.png" style="display:none;" id="e3">
+				</div>
+				<div class="info" style="display:none;">
+					<div id="l_info"></div>
+					<div id="center_info"></div>
+					<div id="r_info"></div>
+				</div>
+			</div>	
+	</div>
+	
+	<div>
+		<input type="button" class="shiftdown" id="go_to_draw">
+		<p id="little_hint" style="display:none;">前<br>往<br>障<br>礙<br>選<br>擇<br>器</p>
+	</div>
+	
+</body>
+
+
+</html>

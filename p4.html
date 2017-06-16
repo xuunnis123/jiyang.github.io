@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<style type="text/css">
+			@import url(http://fonts.googleapis.com/earlyaccess/notosanstc.css);
+
+			body{
+				 background-image:url(bg.png);
+				 background-repeat:no-repeat;
+				 background-attachment:fixed;
+				 background-position:center;
+				 background-size:cover;
+				 cursor: context-menu;
+				}
+			.big_square{
+				position:fixed;
+				top:7%;
+				left:5%;
+				height:84%;
+				width:90%;
+				background:rgba(13,13,13,0.45);
+			}
+			#big_head{
+				font-size:55px;
+				font-family:'Noto Sans TC';
+				color:white;
+				font-weight:bold;
+				text-shadow:1px 2px 2px  #1a1a1a;
+				text-align:center;
+			}
+			#small_head{
+				position:absolute;
+				top:20%;
+				left:21%;
+				font-size:28px;
+				font-family:'Noto Sans TC';
+				color:white;
+				font-weight:bold;
+				text-shadow:1px 2px 2px  #1a1a1a;
+				text-align:center;
+			}
+			.st{
+				background:rgba(166, 166, 166,0.6);
+				text-shadow:2px 1px 2px  #1a1a1a;
+				border:none;
+				padding:13px 85px ;				
+				font-family:'Noto Sans TC';
+				font-size:30px;
+				
+				color:#f2f2f2;
+				font-weight:bold;
+				text-align:center;
+			}
+			.st:hover{
+				color:#ffd966;
+			}
+			.st:focus{
+				outline: none;
+			}
+			#xf{
+				position:absolute;
+				top:38%;
+				left:15%;
+			}
+			#cc{
+				position:absolute;
+				padding:10px 82px ;
+				top:38%;
+				left:41%;
+			}
+			#xing{
+				position:absolute;
+				top:38%;
+				right:15%;
+			}
+			#sure{
+				position:fixed;
+				top:60%;
+				left:42%;
+				color:#f2f2f2;
+				font-family:'Noto Sans TC';
+				font-weight:bold;
+				text-shadow:1px 2px 2px  #1a1a1a;
+				font-size:170%;
+				text-align:center;
+				background:rgba(191, 191, 191,0.5);
+				border:0px;
+				height:65px;
+				width:16%;
+				border-radius:50px;
+			}
+			#sure:hover{
+				background:rgba(38,38,38,0.5);
+			}
+			#sure:focus{
+				outline: none;
+			}
+			#go_to_first{
+				position:absolute;
+				background-image:url(pointer.png);
+				background-size:75%;
+				background-repeat:no-repeat;
+				background-color: transparent;
+				background-position:center;
+				border:0px;
+				height:90px;
+				width:75px;
+				top:44%;
+				right:0.4%;
+			}
+			#go_to_first:hover{
+				background-image:url(pointer_hover.png);
+				background-color: transparent;
+			}
+			#go_to_first:focus{
+				outline: none;
+			}
+			#choice_hint{
+				position:absolute;
+				top:78%;
+				left:41.6%;
+				font-family:'Noto Sans TC';
+				font-weight:bold;
+				color:#f2f2f2;
+				text-shadow:1px 2px 2px  #1a1a1a;
+				font-size:21px;
+				text-align:center;
+			}
+			#little_hint{
+				position:absolute;
+				right:2.2%;
+				top:53%;
+				font-family:'Noto Sans TC';
+				font-size:24px;
+				color:white;
+				font-weight:bold;
+				text-align:center;
+				text-shadow:1px 2px 2px  #1a1a1a;
+			}
+			.result_6{				
+				font-family:微軟正黑體;
+				font-size:24px;
+				color:white;
+				text-align:center;
+				text-shadow:1px 2px 2px  #1a1a1a;
+			}
+			#six_store{
+				background:rgba(0, 0, 0,0.5);
+				position:absolute;
+				top:20%;
+				left:5%;
+				width:340px;
+				height:420px;
+			}
+			#six_location{
+				background:rgba(0, 0, 0,0.5);
+				position:absolute;
+				top:20%;
+				left:35.5%;
+				width:340px;
+				height:420px;
+			}
+			.information{
+				padding:3px 140px ;
+				border:none;
+				background:rgba(166, 166, 166,0.4);
+				font-family:'Noto Sans TC';
+				font-size:30px;
+				color:#f2f2f2;
+				font-weight:bold;
+				text-align:center;
+				text-shadow:1px 2px 2px  #1a1a1a;
+			}
+			#store_name{
+				position:absolute;
+				top:5%;
+				left:5%;
+			}
+			#loca{
+				position:absolute;
+				top:5%;
+				left:35.5%;
+			}
+			#draw_result{
+				position:absolute;
+				top:5%;
+				right:5%;
+			}
+			#draw{				
+				position:absolute;
+				right:18.6%;
+				top:92%;
+				font-family:'Noto Sans TC';
+				font-size:30px;
+				color:#f2f2f2;
+				font-weight:bold;
+				text-align:center;
+				text-shadow:1px 2px 2px  #1a1a1a;
+			}
+			#only_store{
+				background:rgba(0, 0, 0,0.5);
+				position:absolute;
+				top:20%;
+				right:5%;
+				width:400px;
+				height:420px;
+				font-size:30px;
+			}
+			#go_to_draw{
+				position:absolute;
+				background-image:url(pointer_n.png);
+				background-size:75%;
+				background-repeat:no-repeat;
+				background-color: transparent;
+				background-position:center;
+				border:0px;
+				height:90px;
+				width:75px;
+				top:44%;
+				left:0.4%;
+			}
+			#go_to_draw:hover{
+				background-image:url(pointer_hover_n.png);
+				background-color: transparent;
+			}
+			#go_to_draw:focus{
+				outline:none;
+			}
+			#little_hint2{
+				position:absolute;
+				left:2.2%;
+				top:53%;
+				font-family:'Noto Sans TC';
+				font-size:24px;
+				color:white;
+				font-weight:bold;
+				text-align:center;
+				text-shadow:1px 2px 2px  #1a1a1a;
+			}
+		</style>
+		<script src="jquery-3.2.1.js"></script>
+		<script>
+			var store_xf=['吉味屋','雨軒拉麵','瘋81','林桑','老朱牛肉麵','富而美','20元麵店','義起來玩吧','晉好食','蟹老闆壽司','瑞麟美而美','早安美芝城','北寧早餐店','日久阿囉哈','金園'];//15
+			var store_cc=['阿邦燒臘','陳家蔥油餅','歐林鐵板燒','永和豆漿','霸味薑母鴨','牛膳房','海大燒臘','宜蘭包子店','佬地方','八方雲集','寶妹','三媽臭臭鍋','吮指王','小蘋果蔥抓餅','星翔快餐','APPLE203','ㄚMAN'];//17
+			var store_xing=['魔王雞排','NASO CAFE','老先覺','魯肉男便當','炭烤三明治','麥當勞','TOGO CAFE','MARLON','蒸餃小舖','紀香無骨炸雞','永亨鹹酥雞','承香廚館','大滷桶','小廟口','香廚麵食','QQ魯肉飯','董娘水餃','山海屋','5味臭臭鍋'];//19
+
+			var count_xf=0,count_cc=0,count_xing=0;
+			var sure_xf=-1,sure_cc=-1,sure_xing=-1;//-1不要 1要
+			
+			function start(){
+				$(document).ready(function(){
+					$(".final_result").hide();
+					$(".result_6").hide();
+					$(".choose_page").show();
+				});	
+				document.getElementById("go_to_first").addEventListener("click",change_first,false);
+				document.getElementById("go_to_draw").addEventListener("click",change_draw,false);
+				/*確認要否*/
+				$(document).ready(function(){
+					$("#xf").click(function(){
+						count_xf++;
+						if(count_xf%2==0){sure_xf=-1; $("#xf").css('color','#f2f2f2'); }
+						if(count_xf%2==1){sure_xf=1;  $("#xf").css('color','#ffd966'); }
+					});
+					$("#cc").click(function(){
+						count_cc++;
+						if(count_cc%2==0){sure_cc=-1; $("#cc").css('color','#f2f2f2');}
+						if(count_cc%2==1){sure_cc=1;  $("#cc").css('color','#ffd966');}
+					});
+					$("#xing").click(function(){
+						count_xing++;
+						if(count_xing%2==0){sure_xing=-1; $("#xing").css('color','#f2f2f2');}
+						if(count_xing%2==1){sure_xing=1;  $("#xing").css('color','#ffd966');}
+					});
+				});
+				/*********/
+				document.getElementById("sure").addEventListener("click",six_result,false);
+			}
+			
+			function six_result(){
+				$(document).ready(function(){
+					$(".final_result").hide();
+					$(".result_6").show();
+					$(".choose_page").hide();
+				});	
+				
+				/*三種皆有*/
+				var random_store=[];
+				var random_location=[];
+				if(sure_xf==1&&sure_cc==1&&sure_xing==1){
+					var rn_xf_1=-1;
+					var rn_xf_2=-1;
+					while(rn_xf_1==rn_xf_2){
+						rn_xf_1=Math.floor(Math.random()*15);
+						rn_xf_2=Math.floor(Math.random()*15);
+					}
+					var rn_cc_1=-1;
+					var rn_cc_2=-1;
+					while(rn_cc_1==rn_cc_2){
+						rn_cc_1=Math.floor(Math.random()*17);
+						rn_cc_2=Math.floor(Math.random()*17);
+					}
+					var rn_xing_1=-1;
+					var rn_xing_2=-1;
+					while(rn_xing_1==rn_xing_2){
+						rn_xing_1=Math.floor(Math.random()*19);
+						rn_xing_2=Math.floor(Math.random()*19);
+					}
+					random_store=[store_xf[rn_xf_1],store_xf[rn_xf_2],store_cc[rn_cc_1],store_cc[rn_cc_2],store_xing[rn_xing_1],store_xing[rn_xing_2]];			
+					random_location=['祥豐街','祥豐街','中正路','中正路','新豐街','新豐街'];
+				}
+				/*兩種*//*有三種可能*/
+				var rn_xf1=-1,rn_xf2=-1,rn_xf3=-1;
+				var rn_cc1=-1,rn_cc2=-1,rn_cc3=-1;
+				var rn_xi1=-1,rn_xi2=-1,rn_xi3=-1;
+				if(sure_xf==1&&sure_cc==1&&sure_xing==-1){
+					while(rn_xf1==rn_xf2||rn_xf1==rn_xf3||rn_xf2==rn_xf3){
+						rn_xf1=Math.floor(Math.random()*15);
+						rn_xf2=Math.floor(Math.random()*15);
+						rn_xf3=Math.floor(Math.random()*15);
+					}
+					while(rn_cc1==rn_cc2||rn_cc1==rn_cc3||rn_cc2==rn_cc3){
+						rn_cc1=Math.floor(Math.random()*17);
+						rn_cc2=Math.floor(Math.random()*17);
+						rn_cc3=Math.floor(Math.random()*17);
+					}
+					random_store=[store_xf[rn_xf1],store_xf[rn_xf2],store_xf[rn_xf3],store_cc[rn_cc1],store_cc[rn_cc2],store_cc[rn_cc3]];
+					random_location=['祥豐街','祥豐街','祥豐街','中正路','中正路','中正路'];
+				}
+				if(sure_xf==1&&sure_cc==-1&&sure_xing==1){
+					while(rn_xf1==rn_xf2||rn_xf1==rn_xf3||rn_xf2==rn_xf3){
+						rn_xf1=Math.floor(Math.random()*15);
+						rn_xf2=Math.floor(Math.random()*15);
+						rn_xf3=Math.floor(Math.random()*15);
+					}
+					while(rn_xi1==rn_xi2||rn_xi1==rn_xi3||rn_xi2==rn_xi3){
+						rn_xi1=Math.floor(Math.random()*19);
+						rn_xi2=Math.floor(Math.random()*19);
+						rn_xi3=Math.floor(Math.random()*19);
+					}
+					random_store=[store_xf[rn_xf1],store_xf[rn_xf2],store_xf[rn_xf3],store_xing[rn_xi1],store_xing[rn_xi2],store_xing[rn_xi3]];
+					random_location=['祥豐街','祥豐街','祥豐街','新豐街','新豐街','新豐街'];
+				}
+				if(sure_xf==-1&&sure_cc==1&&sure_xing==1){
+					while(rn_cc1==rn_cc2||rn_cc1==rn_cc3||rn_cc2==rn_cc3){
+						rn_cc1=Math.floor(Math.random()*17);
+						rn_cc2=Math.floor(Math.random()*17);
+						rn_cc3=Math.floor(Math.random()*17);
+					}
+					while(rn_xi1==rn_xi2||rn_xi1==rn_xi3||rn_xi2==rn_xi3){
+						rn_xi1=Math.floor(Math.random()*19);
+						rn_xi2=Math.floor(Math.random()*19);
+						rn_xi3=Math.floor(Math.random()*19);
+					}
+					random_store=[store_cc[rn_cc1],store_cc[rn_cc2],store_cc[rn_cc3],store_xing[rn_xi1],store_xing[rn_xi2],store_xing[rn_xi3]];				
+					random_location=['中正路','中正路','中正路','新豐街','新豐街','新豐街'];
+				}
+				/*一種*//*三種可能*/
+				var store_xf_copy=['吉味屋','雨軒拉麵','瘋81','林桑','老朱牛肉麵','富而美','20元麵店','義起來玩吧','晉好食','蟹老闆壽司','瑞麟美而美','早安美芝城','北寧早餐店','日久阿囉哈','金園'];//15
+				var store_cc_copy=['阿邦燒臘','陳家蔥油餅','歐林鐵板燒','永和豆漿','霸味薑母鴨','牛膳房','海大燒臘','宜蘭包子店','佬地方','八方雲集','寶妹','三媽臭臭鍋','吮指王','小蘋果蔥抓餅','星翔快餐','APPLE203','ㄚMAN'];//17
+				var store_xing_copy=['魔王雞排','NASO CAFE','老先覺','魯肉男便當','炭烤三明治','麥當勞','TOGO CAFE','MARLON','蒸餃小舖','紀香無骨炸雞','永亨鹹酥雞','承香廚館','大滷桶','小廟口','香廚麵食','QQ魯肉飯','董娘水餃','山海屋','5味臭臭鍋'];//19
+				var rand;
+				if(sure_xf==1&&sure_cc==-1&&sure_xing==-1){
+					for(var x=0;x<15;x++){
+						rand=Math.floor(Math.random()*15);
+						tmp=store_xf_copy[x];
+						store_xf_copy[x]=store_xf_copy[rand];
+						store_xf_copy[rand]=tmp;
+					}
+					for(var y=0;y<6;y++){
+						random_store[y]=store_xf_copy[y];
+					}
+					random_location=['祥豐街','祥豐街','祥豐街','祥豐街','祥豐街','祥豐街'];
+				}
+				if(sure_xf==-1&&sure_cc==1&&sure_xing==-1){
+					for(var x1=0;x1<17;x1++){
+						rand=Math.floor(Math.random()*17);
+						tmp=store_cc_copy[x1];
+						store_cc_copy[x1]=store_cc_copy[rand];
+						store_cc_copy[rand]=tmp;
+					}
+					for(var y1=0;y1<6;y1++){
+						random_store[y1]=store_cc_copy[y1];
+					}
+					random_location=['中正路','中正路','中正路','中正路','中正路','中正路'];
+				}
+				if(sure_xf==-1&&sure_cc==-1&&sure_xing==1){
+					for(var x2=0;x2<19;x2++){
+						rand=Math.floor(Math.random()*19);
+						tmp=store_xing_copy[x2];
+						store_xing_copy[x2]=store_xing_copy[rand];
+						store_xing_copy[rand]=tmp;
+					}
+					for(var y2=0;y2<6;y2++){
+						random_store[y2]=store_xing_copy[y2];
+					}
+					random_location=['新豐街','新豐街','新豐街','新豐街','新豐街','新豐街'];
+				}
+				
+				var six_result_message='';
+				var six_location_message='';
+				for(var h=0;h<6;h++){
+					six_result_message+="<p>"+random_store[h]+"</p>";
+					six_location_message+="<p>"+random_location[h]+"</p>"
+				}
+				document.getElementById("six_store").innerHTML=six_result_message;
+				document.getElementById("six_location").innerHTML=six_location_message;
+				
+
+				$(document).ready(function(){
+					$("#draw_result").click(function(){
+						var rand_only;
+						rand_only=Math.floor(Math.random()*6);
+						document.getElementById("only_store").innerHTML="<p>系統抽籤結果為</p>"+"<p style='color:#ffd966; font-size:40px; font-weight:bold;'>"+random_store[rand_only]+"</p>"+"<p>若欲重抽</p><p>請點選上方抽籤結果</p>";
+					});
+				});
+			}
+
+			function change_first(){
+				location.href='page2.html';
+			}
+			$(document).ready(function(){
+				$("#go_to_first").mouseover(function(){
+					$("#little_hint").show();
+				});
+				$("#go_to_first").mouseout(function(){
+					$("#little_hint").hide();
+				});
+			});
+			function change_draw(){
+				location.href='p4.html';
+			}
+			$(document).ready(function(){
+				$("#go_to_draw").mouseover(function(){
+					$("#little_hint2").show();
+				});
+				$("#go_to_draw").mouseout(function(){
+					$("#little_hint2").hide();
+				});
+			});
+			window.addEventListener( "load", start, false );
+		</script>
+	</head>
+	
+	<body>
+		<div id="bgs" class="big_square">
+			<div class="choose_page">
+				<p id="big_head">想不到吃甚麼? 沒關係，我們幫你！</p>
+				<p id="small_head">先點選想要的區域再按確定，我們將隨機列出6家店家供您挑選</p>
+				
+				<form action="#">
+					<input type="button" value="祥豐街" class="st" id="xf">
+					<input type="button" value="中正路" class="st" id="cc">
+					<input type="button" value="新豐街" class="st" id="xing">
+					<input type="button" value="確定" id="sure">				
+				</form>
+				<p id="choice_hint">選擇最少一項，最多三項！</p>
+			</div>		
+			<!--顯示6家店-->
+			<div class="result_6">
+				<div class="information" id="store_name">店家</div>
+				<div class="information" id="loca">地點</div>
+				<div class="information" id="draw_result">抽籤結果</div>
+				<div id="six_store"></div>
+				<div id="six_location"></div>
+				<div id="only_store"><p style="position:absolute; top:85%; right:11%; font-size:24px;">點選上方抽籤結果可進行抽籤</p></div>
+			</div>
+			<!--最終結果-->
+		</div>
+		<div>
+			<input type="button" class="shiftdown" id="go_to_first">
+			<input type="button" class="shiftdown" id="go_to_draw">
+
+			<p id="little_hint" style="display:none;">前<br>往<br>主<br>頁</p>
+			<p id="little_hint2" style="display:none;">前<br>往<br>障<br>礙<br>選<br>擇<br>器</p>
+		</div>
+	</body>
+</html>
